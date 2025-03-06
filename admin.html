@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .admin-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .users-table th, .users-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .users-table th {
+            background: rgba(84, 242, 242, 0.1);
+            color: var(--neon);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .admin-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .role-btn {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .ban-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .delete-btn {
+            background: #ff4757;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">🎮 ByteShop</div>
+        <button class="navbar-toggle">☰</button>
+        <ul class="navbar-menu">
+            <li><a href="index.html">На главную</a></li>
+            <li id="logoutButton"><a href="#">Выйти</a></li>
+        </ul>
+    </nav>
+
+    <div class="admin-container">
+        <h1>Управление пользователями</h1>
+        <table class="users-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Имя</th>
+                    <th>Email</th>
+                    <th>Роль</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody id="usersList">
+               
+            </tbody>
+        </table>
+    </div>
+
+    <script src="scripts/admin.js"></script>
+</body>
+</html>

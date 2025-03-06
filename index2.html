@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+    margin: 0;
+}
+
+.logo-container {
+    position: relative;
+    padding: 40px;
+    background: 
+        linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%),
+        url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10" fill="%2354F2F2" opacity="0.2"/><path d="M5 5l10 10M15 5l-10 10" stroke="%2354F2F2" opacity="0.1"/></svg>');
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.logo-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(84, 242, 242, 0.5);
+}
+
+.logo-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.emoji {
+    font-size: 64px;
+    background: linear-gradient(45deg, #54F2F2, #6BFFB3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 10px #54F2F2);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 24px;
+    color: #54F2F2;
+    text-shadow: 0 0 10px #54F2F2;
+    position: relative;
+}
+
+.holographic {
+    background: linear-gradient(45deg, 
+        #54F2F2 25%, 
+        #FF6B6B 50%, 
+        #6BFFB3 75%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: hologram 3s infinite;
+}
+
+@keyframes hologram {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Lightning animation */
+.lightning {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.lightning path {
+    stroke: #54F2F2;
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 2s linear forwards;
+}
+
+@keyframes draw {
+    to { stroke-dashoffset: 0; }
+}
+</style>
+</head>
+<body>
+    <div class="logo-container">
+        <div class="logo-content">
+            <svg class="lightning" viewBox="0 0 24 24">
+                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/>
+            </svg>
+            <div class="emoji">🎮</div>
+            <h1 class="title holographic">ByteShop</h1>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль покупателя</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/profile.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">🎮 ByteShop</div>
+        <button class="navbar-toggle">☰</button>
+        <ul class="navbar-menu">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="profile.html">Профиль</a></li>
+            <li><a href="auth.html">Выйти</a></li>
+        </ul>
+    </nav>
+
+    <div class="profile-container">
+        <div class="user-header">
+            <div class="user-info">
+                <div class="user-name-wrapper">
+                    <h1 id="userName"></h1>
+                    <span class="badge">Покупатель</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2>🎮 Приобретенные товары</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="https://via.placeholder.com/400x180" alt="Игра">
+                    <h3>Cyberpunk 2077</h3>
+                    <p>Цифровая версия • Активация через Steam</p>
+                    <button class="action-button">Получить ключ</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>💬 История чатов</h2>
+            <div class="chats-list">
+                <div class="chat-item">
+                    <div class="chat-header">
+                        <span class="seller-name">GameMasterPro</span>
+                        <span class="chat-date">15.07.2023</span>
+                    </div>
+                    <div class="chat-preview">Добрый день! Ваш ключ активации...</div>
+                    <button class="action-button mini-button">Открыть чат</button>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="security-section">
+            <h2>🔐 Управление аккаунтом</h2>
+            <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                <button class="action-button">Сменить пароль</button>
+                <button class="action-button" style="background: linear-gradient(45deg, #6B6BFF, #538EFF);">
+                    История операций
+                </button>
+                <button class="action-button" id="sellerBtn">Стать продавцом</button>
+            </div>
+        </div>
+
+
+        
+    </div>
+
+    
+
+    <!-- Модальное окно для условий продавца -->
+    <div class="modal-overlay" id="sellerModal">
+        <div class="modal-content">
+            <div class="modal-header">Условия для продавцов</div>
+            <ul class="terms-list">
+                <li>✔️ Вы обязуетесь соблюдать правила площадки</li>
+                <li>✔️ Запрещена продажа запрещенного контента</li>
+                <li>✔️ Комиссия сервиса составляет 10% от каждой сделки</li>
+                <li>✔️ Вы несете ответственность за достоверность описания товаров</li>
+                <li>✔️ Администрация оставляет за собой право блокировать аккаунт за нарушения</li>
+            </ul>
+            <div class="modal-actions">
+                <button class="action-button" onclick="closeModal()">Отмена</button>
+                <button class="action-button" style="background: linear-gradient(45deg, #6BFF6B, #53FF8E);" 
+                        onclick="submitSellerRequest()">Принимаю условия</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/profile.js"></script>
+</body>
+</html>

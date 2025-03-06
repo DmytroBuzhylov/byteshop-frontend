@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товары продавца</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        
+        .products-page {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(45, 45, 45, 0.9);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .products-header h1 {
+            color: #54F2F2;
+            text-shadow: 0 0 10px rgba(84, 242, 242, 0.4);
+            font-size: 2.5rem;
+        }
+
+        .add-product-btn {
+            background: linear-gradient(45deg, #54F2F2, #6BFFB3);
+            padding: 12px 25px;
+            border-radius: 30px;
+            color: #2D3436;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .add-product-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(84, 242, 242, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(84, 242, 242, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .product-name {
+            color: #54F2F2;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: #FF6B6B;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .product-description {
+            color: #ddd;
+            font-size: 0.95rem;
+            margin: 1rem 0;
+        }
+
+        .edit-btn {
+            width: 100%;
+            padding: 10px;
+            background: #54F2F2;
+            color: #2D3436;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(84, 242, 242, 0.3);
+        }
+
+        .no-products {
+            text-align: center;
+            color: #888;
+            font-size: 1.2rem;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">🎮 ByteShop</div>
+        <button class="navbar-toggle">☰</button>
+        <ul class="navbar-menu">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="profile.html">Профиль</a></li>
+            <li><a href="auth.html">Выйти</a></li>
+        </ul>
+    </nav>
+
+    <div class="products-page">
+        <div class="products-header">
+            <h1>Товары продавца</h1>
+            <a href="add-product.html" class="add-product-btn">+ Новый товар</a>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            
+            <div class="no-products">Нет товаров</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'auth.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:50052/seller-products', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Ошибка загрузки товаров');
+
+                const products = await response.json();
+                renderProducts(products);
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка загрузки товаров');
+            }
+        });
+
+        function renderProducts(products) {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+
+            if (!products || products.length === 0) {
+                productsGrid.innerHTML = '<div class="no-products">Нет товаров</div>';
+                return;
+            }
+
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('product-card');
+
+                productCard.innerHTML = `
+                    <img src="http://localhost:50052${product.imageURL}" alt="${product.name}" class="product-image">
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">${product.price.toFixed(2)} ГРН</div>
+                    <div class="product-description">${product.description}</div>
+                    <button class="edit-btn" onclick="location.href='edit-product.html?id=${product.productID}'">
+                        Редактировать
+                    </button>
+                `;
+
+                productsGrid.appendChild(productCard);
+            });
+        }
+    </script>
+</body>
+</html>
