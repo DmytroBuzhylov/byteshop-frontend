@@ -1,0 +1,205 @@
+/* Основные стили для страницы чата */
+.chat-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    padding: 20px;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.chat-header h2 {
+    color: #54F2F2;
+    text-shadow: 0 0 8px rgba(84, 242, 242, 0.4);
+}
+
+.seller-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.seller-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #54F2F2;
+}
+
+.seller-info span {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+/* Контейнер для сообщений */
+.chat-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Стили для сообщений */
+.message {
+    padding: 12px;
+    border-radius: 12px;
+    max-width: 70%;
+    position: relative;
+    animation: messageAppear 0.3s ease;
+}
+
+.message.user {
+    background: rgba(84, 242, 242, 0.15);
+    margin-left: auto;
+    border: 1px solid rgba(84, 242, 242, 0.3);
+}
+
+.message.seller {
+    background: rgba(255, 107, 107, 0.15);
+    margin-right: auto;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.message-content {
+    font-size: 1rem;
+    color: #fff;
+}
+
+.message-time {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 5px;
+    text-align: right;
+}
+
+/* Поле ввода */
+.chat-input-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+#messageInput {
+    flex-grow: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+}
+
+#messageInput:focus {
+    box-shadow: 0 0 10px rgba(84, 242, 242, 0.3);
+}
+#sendButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--neon);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(84, 242, 242, 0.3);
+}
+
+#sendButton:hover {
+    background: var(--primary);
+    transform: scale(1.1);
+}
+
+#sendButton:active {
+    transform: scale(0.9);
+}
+
+#sendButton span {
+    margin-left: 5px; 
+}
+
+
+.chat-messages {
+    scrollbar-width: thin; 
+    scrollbar-color: var(--neon) rgba(255, 255, 255, 0.1); 
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1); 
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: var(--neon); 
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.2); 
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: var(--primary); 
+}
+
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .chat-page {
+        padding: 10px;
+    }
+
+    .chat-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+}

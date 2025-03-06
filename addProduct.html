@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить товар</title>
+    <style>
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #54F2F2;
+            --dark: #2D3436;
+            --light: #F9F9F9;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            color: var(--light);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(45, 45, 45, 0.9);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            color: var(--secondary);
+            text-shadow: 0 0 10px var(--secondary);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--secondary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .form-group .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .form-group .file-upload label {
+            display: block;
+            padding: 10px;
+            background: var(--primary);
+            color: var(--light);
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .form-group .file-upload label:hover {
+            background: #e55a5a;
+        }
+
+        .delivery-type {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .delivery-type label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .delivery-type input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .keys-section,
+        .link-section {
+            display: none;
+            padding: 1rem;
+            border-radius: 10px;
+            background: rgba(84, 242, 242, 0.1); 
+            border: 1px solid var(--secondary);
+            box-shadow: 0 0 10px rgba(84, 242, 242, 0.3);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .keys-section label,
+        .link-section label {
+            font-size: 1.1rem;
+            color: var(--secondary);
+        }
+
+        .keys-section textarea,
+        .link-section input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        .keys-section textarea:focus,
+        .link-section input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: var(--light);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: #e55a5a;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Добавить новый товар</h1>
+        <form id="add-product-form">
+            
+            <div class="form-group">
+                <label for="product-name">Название товара</label>
+                <input type="text" id="product-name" name="product-name" placeholder="Введите название товара" required>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="product-image">Фото товара</label>
+                <div class="file-upload">
+                    <input type="file" id="product-image" name="product-image" accept="image/*" required>
+                    <label for="product-image">Загрузить фото</label>
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="product-price">Цена товара</label>
+                <input type="number" id="product-price" name="product-price" placeholder="Введите цену" min="0" max="1000000" required>
+            </div>
+
+           
+            <div class="form-group">
+                <label for="product-features">Особенности товара</label>
+                <textarea id="product-features" name="product-features" placeholder="Опишите особенности товара" required></textarea>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="product-category">Категория товара</label>
+                <select id="product-category" name="product-category" required>
+                    <option value="books">📚 Книги</option>
+                    <option value="courses">🎓 Курсы</option>
+                    <option value="gaming-accounts">🎮 Игровые аккаунты</option>
+                    <option value="digital-goods">💾 Цифровые товары</option>
+                    <option value="steam-keys">🕹️ Ключи Steam</option>
+                    <option value="online-services">🌐 Интернет-услуги</option>
+                </select>
+            </div>
+
+           
+            <div class="form-group">
+                <label>Тип доставки</label>
+                <div class="delivery-type">
+                    <label>
+                        <input type="radio" name="delivery-type" value="key" checked>
+                        Ключ активации
+                    </label>
+                    <label>
+                        <input type="radio" name="delivery-type" value="link">
+                        Ссылка для скачивания
+                    </label>
+                </div>
+            </div>
+
+            
+            <div class="keys-section" id="keys-section">
+                <label for="product-keys">Ключи активации</label>
+                <textarea id="product-keys" name="product-keys" placeholder="Введите ключи активации (каждый с новой строки)"></textarea>
+            </div>
+
+            
+            <div class="link-section" id="link-section">
+                <label for="product-link">Ссылка для скачивания</label>
+                <input type="url" id="product-link" name="product-link" placeholder="Введите ссылку">
+            </div>
+
+            
+            <button type="submit" class="submit-button">Добавить товар</button>
+        </form>
+    </div>
+
+    <script src="scripts/addProduct.js"></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль продавца</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .seller-profile {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(45, 45, 45, 0.9);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .seller-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .seller-info h1 {
+            color: #54F2F2;
+            text-shadow: 0 0 10px rgba(84, 242, 242, 0.4);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            color: #FF6B6B;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .stat-card p {
+            font-size: 2rem;
+            color: #54F2F2;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .products-management {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+        }
+
+        .review-card {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .review-rating {
+            color: #FFCC00;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .action-button {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #54F2F2, #6BFFB3);
+            color: #2D3436;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(84, 242, 242, 0.3);
+        }
+
+        .action-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(84, 242, 242, 0.4);
+        }
+        
+        .chats-list, .inbox-list {
+            margin-top: 1.5rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .chat-item, .inbox-item {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .chat-item:hover, .inbox-item:hover {
+            transform: translateX(5px);
+        }
+
+        .chat-header, .user-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+
+        .seller-name, .user-name {
+            color: #54F2F2;
+            font-weight: bold;
+        }
+
+        .chat-date, .message-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .chat-preview, .message-preview {
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .mini-button {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .email-input {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid #54F2F2;
+        border-radius: 25px;
+        padding: 12px 20px;
+        color: white;
+        width: 100%;
+        margin: 1rem 0;
+        transition: all 0.3s ease;
+    }
+
+    .email-input:focus {
+        outline: none;
+        box-shadow: 0 0 15px rgba(84, 242, 242, 0.3);
+    }
+
+    .paypal-section {
+        position: relative;
+        margin-top: 1.5rem;
+    }
+
+    .stat-card p {
+        font-size: 2rem;
+        color: #54F2F2;
+        font-weight: bold;
+        margin: 1rem 0;
+        text-shadow: 0 0 10px rgba(84, 242, 242, 0.3);
+    }
+
+    .loading-spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #54F2F2;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">🎮 ByteShop</div>
+        <button class="navbar-toggle">☰</button>
+        <ul class="navbar-menu">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="profile.html">Профиль</a></li>
+            <li><a href="auth.html">Выйти</a></li>
+        </ul>
+    </nav>
+
+    <div class="seller-profile">
+        <div class="seller-header">
+            <div class="seller-info">
+                <h1 id="userName"></h1>
+                <span class="badge" style="background: #54F2F2; color: #2D3436;">Проверенный продавец</span>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>🛍️ Активные товары</h3>
+                <p id="activeProductsCount"></p>
+                <button class="action-button" onclick="location.href='addProduct.html'">Добавить новый</button>
+            </div>
+            
+            <div class="stat-card">
+                <h3>⭐ Средний рейтинг</h3>
+                <p id="averageRating"></p>
+                <button class="action-button">Посмотреть отзывы</button>
+            </div>
+
+            <div class="stat-card">
+                <h3>💳 PayPal аккаунт</h3>
+                <div class="paypal-section">
+                    <input type="email" id="paypalEmail" class="email-input" placeholder="name@example.com">
+                    <button class="action-button mini-button" onclick="updatePaypalEmail()">Обновить</button>
+                </div>
+            </div>
+
+            
+
+        </div>
+
+        <div class="products-management">
+            <div class="content-section">
+                <h2>📨 Входящие сообщения</h2>
+                <div class="inbox-list">
+                    <div class="inbox-item">
+                        <div class="user-info">
+                            <span class="user-name"></span>
+                            <span class="message-date"></span>
+                        </div>
+                        <div class="message-preview"></div>
+                        <button class="action-button mini-button"></button>
+                    </div>
+                    
+                </div>
+            </div>
+            <h2>🚀 Управление товарами</h2>
+            <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button class="action-button">История продаж</button>
+                <button class="action-button" style="background: linear-gradient(45deg, #FF6B6B, #FF8E53);">
+                    Аналитика
+                </button>
+                <button class="action-button" style="background: linear-gradient(45deg, #6B6BFF, #538EFF);" onclick="location.href='seller-products.html'">
+                    Настройки магазина
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/profileSeller.js"></script>
+</body>
+</html>

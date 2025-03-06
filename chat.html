@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ByteShop - Чат с продавцом</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/chat.css">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="navbar-brand">🎮 ByteShop</div>
+        <button class="navbar-toggle">☰</button>
+        <ul class="navbar-menu">
+            <li id="adminLink" style="display: none;"><a href="admin.html">Админ-панель</a></li>
+            <li id="loginButton"><a href="auth.html">Войти</a></li>
+            <li id="logoutButton"><a href="#">Выйти</a></li>
+            <li><a href="profile.html">Профиль</a></li>
+            <li><a href="index.html">Главная</a></li>
+        </ul>
+    </nav>
+
+    
+    <div class="chat-page">
+        <div class="chat-header">
+            <h2>Чат с Димейдом</h2>
+            <div class="seller-info">
+                
+            </div>
+        </div>
+    
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                
+            </div>
+    
+            <div class="chat-input-container">
+                <input type="text" id="messageInput" placeholder="Напишите сообщение...">
+                <button id="sendButton">
+                    <span>➤</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/chat.js"></script>
+</body>
+</html>
